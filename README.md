@@ -6,5 +6,7 @@ I got this idea because I watch the Twitch streamer / Youtuber Northernlion, and
 This is still a work in progress, but I hope to have it done soon. Until then, enjoy what I have now...
 
 Credit for the idea goes to Northernlion
+
   https://www.twitch.tv/northernlion
+  
   https://www.youtube.com/user/Northernlion
