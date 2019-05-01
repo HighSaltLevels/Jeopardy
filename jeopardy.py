@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from questionwindow import QuestionWindow
+from dailydouble import DailyDoubleWindow
 import json, requests, sys
 
 class Jeopardy(QWidget):
@@ -14,6 +15,7 @@ class Jeopardy(QWidget):
         self.double_jeopardy = False
         self.cat_and_questions = {}
         self.categories = []
+        self.daily_doubles = []
 
         self.loadUI()
         self.loadQuestions()
@@ -161,240 +163,390 @@ class Jeopardy(QWidget):
 
     def btn11Handler(self):
         worth = 400 if self.double_jeopardy else 200
-        if self.btn11.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[0]][0]
+        ques = self.cat_and_questions[self.categories[0]][0]
+        if 0 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '00', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '00')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn12Handler(self):
         worth = 400 if self.double_jeopardy else 200
-        if self.btn12.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[1]][0]
+        ques = self.cat_and_questions[self.categories[1]][0]
+        if 1 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '01', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '01')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn13Handler(self):
         worth = 400 if self.double_jeopardy else 200
-        if self.btn13.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[2]][0]
+        ques = self.cat_and_questions[self.categories[2]][0]
+        if 2 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '02', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '02')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn14Handler(self):
         worth = 400 if self.double_jeopardy else 200
-        if self.btn14.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[3]][0]
+        ques = self.cat_and_questions[self.categories[3]][0]
+        if 3 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '03', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '03')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn15Handler(self):
         worth = 400 if self.double_jeopardy else 200
-        if self.btn15.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[4]][0]
+        ques = self.cat_and_questions[self.categories[4]][0]
+        if 4 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '04', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '04')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn16Handler(self):
         worth = 400 if self.double_jeopardy else 200
-        if self.btn16.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[5]][0]
+        ques = self.cat_and_questions[self.categories[5]][0]
+        if 5 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '05', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '05')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn21Handler(self):
         worth = 800 if self.double_jeopardy else 400
-        if self.btn21.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[0]][1]
+        ques = self.cat_and_questions[self.categories[0]][1]
+        if 6 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '06', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '06')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn22Handler(self):
         worth = 800 if self.double_jeopardy else 400
-        if self.btn22.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[1]][1]
+        ques = self.cat_and_questions[self.categories[1]][1]
+        if 7 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '07', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '07')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn23Handler(self):
         worth = 800 if self.double_jeopardy else 400
-        if self.btn23.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[2]][1]
+        ques = self.cat_and_questions[self.categories[2]][1]
+        if 8 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '08', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '08')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn24Handler(self):
         worth = 800 if self.double_jeopardy else 400
-        if self.btn24.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[3]][1]
+        ques = self.cat_and_questions[self.categories[3]][1]
+        if 9 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '09', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '09')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn25Handler(self):
         worth = 800 if self.double_jeopardy else 400
-        if self.btn25.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[4]][1]
+        ques = self.cat_and_questions[self.categories[4]][1]
+        if 10 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '10', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '10')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn26Handler(self):
         worth = 800 if self.double_jeopardy else 400
-        if self.btn26.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[5]][1]
+        ques = self.cat_and_questions[self.categories[5]][1]
+        if 11 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '11', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '11')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn31Handler(self):
         worth = 1200 if self.double_jeopardy else 600
-        if self.btn31.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[0]][2]
+        ques = self.cat_and_questions[self.categories[0]][2]
+        if 12 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '12', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '12')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn32Handler(self):
         worth = 1200 if self.double_jeopardy else 600
-        if self.btn32.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[1]][2]
+        ques = self.cat_and_questions[self.categories[1]][2]
+        if 13 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '13', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '13')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn33Handler(self):
         worth = 1200 if self.double_jeopardy else 600
-        if self.btn33.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[2]][2]
+        ques = self.cat_and_questions[self.categories[2]][2]
+        if 14 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '14', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '14')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn34Handler(self):
         worth = 1200 if self.double_jeopardy else 600
-        if self.btn34.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[3]][2]
+        ques = self.cat_and_questions[self.categories[3]][2]
+        if 15 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '15', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '15')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn35Handler(self):
         worth = 1200 if self.double_jeopardy else 600
-        if self.btn35.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[4]][2]
+        ques = self.cat_and_questions[self.categories[4]][2]
+        if 16 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '16', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '16')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn36Handler(self):
         worth = 1200 if self.double_jeopardy else 600
-        if self.btn36.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[5]][2]
+        ques = self.cat_and_questions[self.categories[5]][2]
+        if 17 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '17', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '17')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn41Handler(self):
         worth = 1600 if self.double_jeopardy else 800
-        if self.btn41.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[0]][3]
+        ques = self.cat_and_questions[self.categories[0]][3]
+        if 18 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '18', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '18')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn42Handler(self):
         worth = 1600 if self.double_jeopardy else 800
-        if self.btn42.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[1]][3]
+        ques = self.cat_and_questions[self.categories[1]][3]
+        if 19 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '19', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '19')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn43Handler(self):
         worth = 1600 if self.double_jeopardy else 800
-        if self.btn43.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[2]][3]
+        ques = self.cat_and_questions[self.categories[2]][3]
+        if 20 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '20', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '20')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn44Handler(self):
         worth = 1600 if self.double_jeopardy else 800
-        if self.btn44.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[3]][3]
+        ques = self.cat_and_questions[self.categories[3]][3]
+        if 21 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '21', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '21')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn45Handler(self):
         worth = 1600 if self.double_jeopardy else 800
-        if self.btn45.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[4]][3]
+        ques = self.cat_and_questions[self.categories[4]][3]
+        if 22 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '22', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '22')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn46Handler(self):
         worth = 1600 if self.double_jeopardy else 800
-        if self.btn46.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[5]][3]
+        ques = self.cat_and_questions[self.categories[5]][3]
+        if 23 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '23', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '23')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn51Handler(self):
         worth = 2000 if self.double_jeopardy else 1000
-        if self.btn51.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[0]][4]
+        ques = self.cat_and_questions[self.categories[0]][4]
+        if 24 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '24', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '24')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn52Handler(self):
         worth = 2000 if self.double_jeopardy else 1000
-        if self.btn52.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[1]][4]
+        ques = self.cat_and_questions[self.categories[1]][4]
+        if 25 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '25', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '25')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn53Handler(self):
         worth = 2000 if self.double_jeopardy else 1000
-        if self.btn53.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[2]][4]
+        ques = self.cat_and_questions[self.categories[2]][4]
+        if 26 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '26', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '26')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn54Handler(self):
         worth = 2000 if self.double_jeopardy else 1000
-        if self.btn54.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[3]][4]
+        ques = self.cat_and_questions[self.categories[3]][4]
+        if 27 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '27', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '27')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn55Handler(self):
         worth = 2000 if self.double_jeopardy else 1000
-        if self.btn55.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[4]][4]
+        ques = self.cat_and_questions[self.categories[4]][4]
+        if 28 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '28', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '28')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
     def btn56Handler(self):
         worth = 2000 if self.double_jeopardy else 1000
-        if self.btn56.text() == '$' + str(worth):
-            ques = self.cat_and_questions[self.categories[5]][4]
+        ques = self.cat_and_questions[self.categories[5]][4]
+        if 29 in self.daily_doubles:
+            msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '29', self.score.text()[1:], self.double_jeopardy)
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
             self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '29')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
@@ -429,6 +581,13 @@ class Jeopardy(QWidget):
             self.categories.append(category.upper())
             self.cat_and_questions[category.upper()] = questions
             self.catlist[i].setText(category.upper())
+
+        daily = randint(0,29)
+        self.daily_doubles.append(daily)
+        second_daily = randint(0,29)
+        while second_daily == daily:
+            second_daily = randint(0,29)
+        self.daily_doubles.append(second_daily)
             
 
 if __name__ == '__main__':
