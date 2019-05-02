@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 class QuestionWindow(QMainWindow):
@@ -18,7 +18,8 @@ class QuestionWindow(QMainWindow):
         self.quesLabel = QLabel('', self)
         self.quesLabel.setFont(QFont("Times", 14))
         self.quesLabel.setWordWrap(True)
-        self.quesLabel.setGeometry(10,10,450,100)
+        self.quesLabel.setGeometry(10,10,475,100)
+        self.quesLabel.setAlignment(Qt.AlignCenter)
         self.revealBtn = QPushButton('Reveal Answer', self)
         self.revealBtn.resize(400,50)
         self.revealBtn.move(50,150)

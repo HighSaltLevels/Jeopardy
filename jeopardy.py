@@ -6,9 +6,9 @@ from questionwindow import QuestionWindow
 from dailydouble import DailyDoubleWindow
 import json, requests, sys
 
-# TODO check for blank answers or blank questions
-# TODO implement reset button
-# TODO prompt user to play again
+# TODO comment code
+# TODO add an icon
+# TODO center text on question
 
 class Jeopardy(QWidget):
 
@@ -174,29 +174,32 @@ class Jeopardy(QWidget):
             self.questions_left.remove(identity)
             if not self.questions_left:
                 if self.double_jeopardy:
-                    pass
+                    res = QMessageBox.question(self, 'Play Again?', 'Would you like to play jeopardy again?')
+                    self.reset() if res == QMessageBox.Yes else sys.exit(0)
                 else:
                     msg = QMessageBox.information(self, 'Double Jeopardy', "It's time to move on to Double Jeopardy!")
-                    self.questions_left = [num for num in range(30)]
-                    self.startDoubleJeopardy()
+                    self.reset(400, False)
                     self.double_jeopardy = True
 
             self.dialog.hide()
 
-    def startDoubleJeopardy(self):
+    def reset(self, amount=200, reset_score=True):
+        if not amount:
+            amount = 200
+        if reset_score:
+            self.score.setText('$0')
+        self.questions_left = [num for num in range(30)]
+        self.double_jeopardy = False
         self.loadQuestions()
         i = 0
-        amount = 400
+        iterated_amount = amount
         for btn in self.btnlist:
-            btn.setText('${}'.format(amount))
+            btn.setText('${}'.format(iterated_amount))
             btn.setEnabled(True)
             i+=1
             if i == 6:
                 i = 0
-                amount+=400
-
-    def reset(self):
-        pass
+                iterated_amount+=amount
 
     def exit(self):
         sys.exit(0)
@@ -607,12 +610,19 @@ class Jeopardy(QWidget):
         questions = []
         for i in range(starting_num,starting_num+5):
             question_answer = {}
-            question = clues[i]['question'].replace('<i>','').replace('</i>','').replace('\\',' ')
-            answer = clues[i]['answer'].replace('<i>','').replace('</i>','').replace('\\',' ')
+            question = clues[i]['question'].replace('<i>','').replace('</i>','').replace('\\',' ').replace('<b>','').replace('</b>','')
+            answer = clues[i]['answer'].replace('<i>','').replace('</i>','').replace('\\',' ').replace('<b>','').replace('</b>','')
             question_answer[question] = answer
             questions.append(question_answer)
 
         return resp['title'], questions
+
+    def checkForEmptyQuestions(self, questions_dicts):
+        for question in questions_dicts:
+                for key in question.keys():
+                    if not key or not question[key]:
+                        return False
+        return True
 
     def loadQuestions(self):
         self.categories = []
@@ -621,6 +631,9 @@ class Jeopardy(QWidget):
 
         for i in range(6):
             category, questions = self.getQuestions()
+
+            while not self.checkForEmptyQuestions(questions):
+                category, questions = self.getQuestions()
 
             self.categories.append(category.upper())
             self.cat_and_questions[category.upper()] = questions
