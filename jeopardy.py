@@ -6,7 +6,9 @@ from questionwindow import QuestionWindow
 from dailydouble import DailyDoubleWindow
 import json, requests, sys
 
-#TODO Make daily doubles subtract from total with no answer
+# TODO check for blank answers or blank questions
+# TODO implement reset button
+# TODO prompt user to play again
 
 class Jeopardy(QWidget):
 
@@ -153,8 +155,11 @@ class Jeopardy(QWidget):
         identity = int(score[:2])
         if identity == 30:
             self.dialog.hide()
-            ques = self.cat_and_questions[self.categories[int(score[3])]][int(score[2])]
-            self.dialog = QuestionWindow(self, 'Daily Double!', ques, int(score[4:]), score[2:4])
+            matrix_num = int(score[2:4])
+            column = matrix_num % 6
+            row = int((matrix_num - column) / 6)
+            ques = self.cat_and_questions[self.categories[column]][row]
+            self.dialog = QuestionWindow(self, 'Daily Double!', ques, int(score[4:]), score[2:4], True)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -205,7 +210,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '00')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '00', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -218,7 +223,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '01')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '01', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -231,7 +236,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '02')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '02', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -244,7 +249,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '03')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '03', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -257,7 +262,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '04')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '04', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -270,7 +275,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '05')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '05', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -283,7 +288,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '06')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '06', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -296,7 +301,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '07')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '07', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -309,7 +314,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '08')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '08', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -322,7 +327,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '09')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '09', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -335,7 +340,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '10')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '10', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -348,7 +353,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '11')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '11', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -361,7 +366,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '12')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '12', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -374,7 +379,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '13')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '13', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -387,7 +392,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '14')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '14', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -400,7 +405,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '15')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '15', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -413,7 +418,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '16')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '16', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -426,7 +431,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '17')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '17', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -439,7 +444,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '18')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '18', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -452,7 +457,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '19')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '19', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -465,7 +470,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '20')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '20', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -478,7 +483,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '21')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '21', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -491,7 +496,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '22')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '22', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -504,7 +509,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '23')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '23', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -517,7 +522,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '24')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '24', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -530,7 +535,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '25')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '25', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -543,7 +548,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '26')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '26', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -556,7 +561,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '27')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '27', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -569,7 +574,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '28')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '28', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 
@@ -582,7 +587,7 @@ class Jeopardy(QWidget):
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
-            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '29')
+            self.dialog = QuestionWindow(self, '${} Question'.format(worth), ques, worth, '29', False)
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
 

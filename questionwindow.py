@@ -6,13 +6,14 @@ class QuestionWindow(QMainWindow):
 
     result_signal = pyqtSignal(str)
 
-    def __init__(self, parent=None, title='Question', question='', worth=0, identity='0'):
+    def __init__(self, parent=None, title='Question', question='', worth=0, identity='0', daily_double=False):
 
         super(QuestionWindow, self).__init__(parent)
         self.setFixedSize(500,300)
         self.setWindowTitle(title)
         self.worth = worth
         self.identity = identity
+        self.daily_double = daily_double
 
         self.quesLabel = QLabel('', self)
         self.quesLabel.setFont(QFont("Times", 14))
@@ -43,14 +44,31 @@ class QuestionWindow(QMainWindow):
         self.show()
 
     def reveal(self):
+        self.revealBtn.setEnabled(False)
         self.revealBtn.setText(self.answer)
 
     def correct(self):
-        self.result_signal.emit(self.identity + str(self.worth))
+        if self.checkForRevealed():
+            self.result_signal.emit(self.identity + str(self.worth))
+        else:
+            self.showWarning()
 
     def incorrect(self):
-        self.result_signal.emit(self.identity + str(-1*self.worth))
+        if self.checkForRevealed():
+            self.result_signal.emit(self.identity + str(-1*self.worth))
+        else:
+            self.showWarning()
 
     def noanswer(self):
-        self.result_signal.emit(self.identity + '0')
+        if self.checkForRevealed():
+            penalty = str(-1*self.worth) if self.daily_double else '0'
+            self.result_signal.emit(self.identity + penalty)
+        else:
+            self.showWarning()
+
+    def checkForRevealed(self):
+        return self.revealBtn.text() != 'Reveal Answer'
+
+    def showWarning(self):
+        msg = QMessageBox.information(self, 'Warning', 'You need to reveal the answer before you can determine if you got it right or wrong')
 
