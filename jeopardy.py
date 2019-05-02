@@ -71,6 +71,9 @@ class Jeopardy(QWidget):
         self.setFixedSize(1200,480)
         self.setWindowTitle('Jeopardy!')
 
+        # Set the icon
+        self.setWindowIcon(QIcon('/usr/local/lib/jeopardy/icon.jpg'))
+
         # Create all the buttons and bind them to their corresponding functions
         self.btn11 = QPushButton('$200',self)
         self.btn11.clicked.connect(self.btn11Handler)
