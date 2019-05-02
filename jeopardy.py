@@ -17,6 +17,8 @@ class Jeopardy(QWidget):
         self.categories = []
         self.daily_doubles = []
 
+        self.questions_left = [num for num in range(30)]
+
         self.loadUI()
         self.loadQuestions()
 
@@ -146,14 +148,38 @@ class Jeopardy(QWidget):
         self.show()
 
     def changeScore(self, score):
+        identity = int(score[0:2])
         current_text = self.score.text()[1:]
         money = int(score[2:])
         new_score = int(current_text) + money
         self.score.setText('${}'.format(new_score))
         res = 'Correct' if money > 0 else 'Incorrect' if money < 0 else 'No Answer'
-        self.btnlist[int(score[0:2])].setText(res)
-        self.btnlist[int(score[0:2])].setEnabled(False)
+        self.btnlist[identity].setText(res)
+        self.btnlist[identity].setEnabled(False)
+
+        self.questions_left.remove(identity)
+        if not self.questions_left:
+            if self.double_jeopardy:
+                pass
+            else:
+                msg = QMessageBox.information(self, 'Double Jeopardy', "It's time to move on to Double Jeopardy!")
+                self.questions_left = [num for num in range(30)]
+                self.startDoubleJeopardy()
+                self.double_jeopardy = True
+
         self.dialog.hide()
+
+    def startDoubleJeopardy(self):
+        self.loadQuestions()
+        i = 0
+        amount = 400
+        for btn in self.btnlist:
+            btn.setText('${}'.format(amount))
+            btn.setEnabled(True)
+            i+=1
+            if i == 6:
+                i = 0
+                amount+=400
 
     def reset(self):
         pass
@@ -575,6 +601,10 @@ class Jeopardy(QWidget):
         return resp['title'], questions
 
     def loadQuestions(self):
+        self.categories = []
+        self.cat_and_questions = {}
+        self.daily_doubles = []
+
         for i in range(6):
             category, questions = self.getQuestions()
 
