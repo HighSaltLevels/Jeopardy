@@ -199,7 +199,7 @@ class Jeopardy(QWidget):
     def btn11Handler(self):
         worth = 400 if self.double_jeopardy else 200
         ques = self.cat_and_questions[self.categories[0]][0]
-        if True:#0 in self.daily_doubles:
+        if 0 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
             self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '00')
             self.dialog.result_signal.connect(self.changeScore)
@@ -214,7 +214,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[1]][0]
         if 1 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '01', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '01')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -227,7 +227,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[2]][0]
         if 2 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '02', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '02')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -240,7 +240,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[3]][0]
         if 3 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '03', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '03')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -253,7 +253,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[4]][0]
         if 4 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '04', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '04')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -266,7 +266,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[5]][0]
         if 5 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '05', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '05')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -279,7 +279,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[0]][1]
         if 6 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '06', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '06')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -292,7 +292,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[1]][1]
         if 7 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '07', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '07')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -305,7 +305,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[2]][1]
         if 8 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '08', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '08')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -318,7 +318,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[3]][1]
         if 9 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '09', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '09')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -331,7 +331,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[4]][1]
         if 10 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '10', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '10')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -344,7 +344,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[5]][1]
         if 11 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '11', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '11')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -357,7 +357,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[0]][2]
         if 12 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '12', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '12')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -370,7 +370,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[1]][2]
         if 13 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '13', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '13')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -383,7 +383,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[2]][2]
         if 14 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '14', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '14')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -396,7 +396,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[3]][2]
         if 15 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '15', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '15')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -409,7 +409,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[4]][2]
         if 16 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '16', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '16')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -422,7 +422,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[5]][2]
         if 17 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '17', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '17')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -435,7 +435,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[0]][3]
         if 18 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '18', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '18')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -448,7 +448,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[1]][3]
         if 19 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '19', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '19')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -461,7 +461,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[2]][3]
         if 20 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '20', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '20')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -474,7 +474,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[3]][3]
         if 21 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '21', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '21')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -487,7 +487,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[4]][3]
         if 22 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '22', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '22')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -500,7 +500,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[5]][3]
         if 23 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '23', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '23')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -513,7 +513,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[0]][4]
         if 24 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '24', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '24')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -526,7 +526,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[1]][4]
         if 25 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '25', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '25')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -539,7 +539,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[2]][4]
         if 26 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '26', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '26')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -552,7 +552,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[3]][4]
         if 27 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '27', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '27')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -565,7 +565,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[4]][4]
         if 28 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '28', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '28')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
@@ -578,7 +578,7 @@ class Jeopardy(QWidget):
         ques = self.cat_and_questions[self.categories[5]][4]
         if 29 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '29', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '29')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
