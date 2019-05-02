@@ -6,6 +6,8 @@ from questionwindow import QuestionWindow
 from dailydouble import DailyDoubleWindow
 import json, requests, sys
 
+#TODO Make daily doubles subtract from total with no answer
+
 class Jeopardy(QWidget):
 
     def __init__(self, parent=None, title=''):
@@ -148,26 +150,33 @@ class Jeopardy(QWidget):
         self.show()
 
     def changeScore(self, score):
-        identity = int(score[0:2])
-        current_text = self.score.text()[1:]
-        money = int(score[2:])
-        new_score = int(current_text) + money
-        self.score.setText('${}'.format(new_score))
-        res = 'Correct' if money > 0 else 'Incorrect' if money < 0 else 'No Answer'
-        self.btnlist[identity].setText(res)
-        self.btnlist[identity].setEnabled(False)
+        identity = int(score[:2])
+        if identity == 30:
+            self.dialog.hide()
+            ques = self.cat_and_questions[self.categories[int(score[3])]][int(score[2])]
+            self.dialog = QuestionWindow(self, 'Daily Double!', ques, int(score[4:]), score[2:4])
+            self.dialog.result_signal.connect(self.changeScore)
+            self.dialog.showQuestion()
+        else:
+            current_text = self.score.text()[1:]
+            money = int(score[2:])
+            new_score = int(current_text) + money
+            self.score.setText('${}'.format(new_score))
+            res = 'Correct' if money > 0 else 'Incorrect' if money < 0 else 'No Answer'
+            self.btnlist[identity].setText(res)
+            self.btnlist[identity].setEnabled(False)
 
-        self.questions_left.remove(identity)
-        if not self.questions_left:
-            if self.double_jeopardy:
-                pass
-            else:
-                msg = QMessageBox.information(self, 'Double Jeopardy', "It's time to move on to Double Jeopardy!")
-                self.questions_left = [num for num in range(30)]
-                self.startDoubleJeopardy()
-                self.double_jeopardy = True
+            self.questions_left.remove(identity)
+            if not self.questions_left:
+                if self.double_jeopardy:
+                    pass
+                else:
+                    msg = QMessageBox.information(self, 'Double Jeopardy', "It's time to move on to Double Jeopardy!")
+                    self.questions_left = [num for num in range(30)]
+                    self.startDoubleJeopardy()
+                    self.double_jeopardy = True
 
-        self.dialog.hide()
+            self.dialog.hide()
 
     def startDoubleJeopardy(self):
         self.loadQuestions()
@@ -190,9 +199,9 @@ class Jeopardy(QWidget):
     def btn11Handler(self):
         worth = 400 if self.double_jeopardy else 200
         ques = self.cat_and_questions[self.categories[0]][0]
-        if 0 in self.daily_doubles:
+        if True:#0 in self.daily_doubles:
             msg = QMessageBox.information(self, 'Daily Double!', 'Answer... DAILY DOUBLE!!!!')
-            self.dialog = DailyDoubleWindow(self, 'Daily Double', ques, '00', self.score.text()[1:], self.double_jeopardy)
+            self.dialog = DailyDoubleWindow(self, 'Daily Double', self.double_jeopardy, self.score.text()[1:], '00')
             self.dialog.result_signal.connect(self.changeScore)
             self.dialog.showQuestion()
         else:
