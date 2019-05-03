@@ -7,6 +7,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 echo "Ensuring python3 and pyqt5 are installed..."
+apt-get update
 apt-get install python3
 apt-get install python3-pyqt5
 
