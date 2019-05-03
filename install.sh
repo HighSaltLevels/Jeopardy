@@ -8,7 +8,7 @@ fi
 
 echo "Ensuring python3 and pyqt5 are installed..."
 apt-get install python3
-apt-get install python-pyqt5
+apt-get install python3-pyqt5
 
 echo "Creating directory for files..."
 mkdir /usr/local/lib/jeopardy
