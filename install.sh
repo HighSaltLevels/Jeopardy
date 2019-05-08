@@ -10,6 +10,11 @@ echo "Ensuring python3 and pyqt5 are installed..."
 apt-get update
 apt-get install python3
 apt-get install python3-pyqt5
+apt-get install python3-pip
+
+echo "Also need setuptools and requests..."
+pip3 install setuptools
+pip3 install requests
 
 echo "Creating directory for files..."
 mkdir /usr/local/lib/jeopardy
